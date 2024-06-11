@@ -1,9 +1,14 @@
 import { NextFunction, Request, Response } from 'express';
 import AuthService from '../auth/auth-service';
+import jwt from 'jsonwebtoken';
 
 const authService = new AuthService();
 
-export const authMiddleware = (req: Request, res: Response, next: NextFunction) => {
+export const authMiddleware = (
+  req: Request,
+  res: Response,
+  next: NextFunction
+) => {
   const authHeader = req.headers.authorization;
   if (!authHeader) {
     return res.status(401).json({ message: 'Authorization header missing' });
